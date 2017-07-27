@@ -1,43 +1,64 @@
-<div ng-class="wd-widget-list">
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand"
-               href="#" style="color: gray;">
-                Widget List
-            </a>
+
+<div class="jga jga-profile">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-left-control">
+                <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page"><span class="glyphicon glyphicon-menu-left"></span></a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand">Widgets</a>
+            </div>
+
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container centered-md space-for-footbar">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/chooser">
+                        <div class="col-xs-12 add-widget-holder" role="button">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </div>
+                    </a>
+                </div>
+
+                <div ng-repeat="widget in model.widgets" class="row">
+                    <div ng-switch="widget.widgetType" class="col-xs-12 widget-holder">
+                        <div ng-switch-when="HEADING">
+                            <ng-include src="'views/widget/templates/widget-heading.view.client.html'"/>
+                        </div>
+                        <div ng-switch-when="IMAGE" style="text-align: center">
+                            <ng-include src="'views/widget/templates/widget-img.view.client.html'"/>
+                        </div>
+                        <div ng-switch-when="YOUTUBE">
+                            <ng-include src="'views/widget/templates/widget-youtube.view.client.html'"/>
+                        </div>
+                        <div ng-switch-when="HTML">
+                            <ng-include src="'views/widget/templates/widget-html.view.client.html'"/>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/chooser">
+                        <div class="col-xs-12 add-widget-holder" role="button">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
+
     </div>
-</nav>
 
-<div class="container-fluid">
 
-    <div ng-repeat="widget in model.widgets"
-         class="wd-widget">
-        <div class="wd-toolbar">
-            <a href="#!/widget/:widgetId">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <!--<div ng-include="model.getWidgetUrlForType(widget.widgetType)"></div>-->
-        <div ng-switch="widget.widgetType">
-            <div ng-switch-when="HEADING">
-                <div ng-include="'views/widget/templates/widget-heading.view.client.html'"></div>
-            </div>
-            <div ng-switch-when="IMAGE">
-                <div ng-include="'views/widget/templates/widget-image.view.client.html'"></div>
-            </div>
-            <div ng-switch-when="HTML"
-                 ng-bind-html="model.trustThisContent(widget.text)">
-            </div>
-            <div ng-switch-when="YOUTUBE">
-                <div ng-include="'views/widget/templates/widget-youtube.view.client.html'"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <div ng-include="'views/common/footer.view.client.html'"></div>
+    <footer class="footer">
+        <a href="#!/user/{{model.uid}}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+    </footer>
 
 </div>

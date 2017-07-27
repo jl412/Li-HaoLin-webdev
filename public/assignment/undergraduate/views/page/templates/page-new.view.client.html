@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>New Page</title>
-    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/styles.css" rel="stylesheet"/>
-    <link href="css/profile.css" rel="stylesheet"/>
-</head>
-<body>
-
 <div class="jga jga-profile">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-left-control">
-                <a href="page-list.html"><span class="glyphicon glyphicon-menu-left"></span></a>
+                <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page"><span class="glyphicon glyphicon-menu-left"></span></a>
             </div>
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">New Page</a>
+                <a class="navbar-brand">New Page</a>
             </div>
 
         </div><!-- /.container-fluid -->
@@ -36,55 +23,27 @@
                         <div class="row">
                             <div class="col-xs-10">Name</div>
                             <div class="col-xs-2">
-                                <a href="website-new.html" style="color:white">
+                                <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/new" style="color:white">
                                     <span class="pull-right glyphicon glyphicon-plus"></span>
                                 </a>
                             </div>
                         </div>
                     </li>
-                    <li class="list-group-item">
+                    <li ng-repeat="page in model.pages" class="list-group-item">
                         <div class="row">
-                            <div class="col-xs-10">Blog Post</div>
+                            <div class="col-xs-10">{{page.name}}</div>
                             <div class="col-xs-2">
-                                <span class="glyphicon glyphicon-cog pull-right"></span>
+                                <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{page._id}}" style="color:white">
+                                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                                </a>
                             </div>
                         </div>
 
                     </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-10">
-                                Blogs
-                            </div>
-                            <div class="col-xs-2">
-                                <span class="glyphicon glyphicon-cog pull-right"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-10">Home
-                            </div>
-                            <div class="col-xs-2">
-                                <span class="glyphicon glyphicon-cog pull-right"></span>
-                            </div>
-                        </div>
-
-
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-10">About</div>
-                            <div class="col-xs-2"></div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">Page A</li>
-                    <li class="list-group-item">Page B</li>
-                    <li class="list-group-item">Page C</li>
-                    <li class="list-group-item">Page D</li>
                 </ul>
 
             </div>
+
             <div class="col-xs-12 col-lg-9 jga-split-view-right">
 
                 <div class="container centered-md space-for-footbar">
@@ -94,26 +53,28 @@
                             <input name="firstName"
                                    placeholder="Facebook"
                                    class="form-control"
-                                   id="name"/>
+                                   id="name"
+                                   ng-model="model.page.name"/>
 
                             <label for="description">Description</label>
                             <textarea name="firstName"
                                       rows="5"
                                       placeholder="Largest country in the world"
                                       class="form-control"
-                                      id="description"></textarea>
+                                      id="description"
+                                      ng-model="model.page.description"></textarea>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
                             <a class="btn btn-default btn-primary btn-block"
-                               href="page-list.html"
+                               ng-click=model.createPage(model.page)
                                role="button">Create</a>
                         </div>
                         <div class="col-md-6">
                             <a class="btn btn-default btn-warning btn-block"
-                               href="page-list.html"
+                               href="#!/user/{{model.uid}}/website/{{model.wid}}/page"
                                role="button">Cancel</a>
                         </div>
                     </div>
@@ -128,5 +89,3 @@
     </footer>
 
 </div>
-</body>
-</html>

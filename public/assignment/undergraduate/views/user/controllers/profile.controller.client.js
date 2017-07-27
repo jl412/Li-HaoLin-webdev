@@ -1,51 +1,41 @@
 (function () {
     angular
         .module('WAM')
-        .controller('profileController', profileController);
-    
-    function profileController(currentUser, $location, userService, $routeParams) {
+        .controller('profileController',profileController);
+
+    function profileController($location,
+                               $routeParams,
+                               userService ) {
 
         var model = this;
-        var userId = currentUser._id;//$routeParams['userId'];
-        model.user = currentUser;
-        model.updateUser = updateUser;
-        model.deleteUser = deleteUser;
-        model.logout = logout;
+        var uid = $routeParams["uid"];
 
-        // userService
-        //     .findUserById(userId)
-        //     .then(renderUser);
-        function init() {
-            // renderUser(currentUser);
-        }
-        init();
-        
-        // function renderUser (user) {
-        //     model.user = user;
-        // }
-        
+        model.update = updateUser;
+
+
         function logout() {
-            userService
-                .logout()
-                .then(function () {
-                    $location.url('/login');
-                });
+            userService.logout();
+            $location.url('/login');
         }
 
         function deleteUser(user) {
-            userService
-                .deleteUser(user._id)
-                .then(function () {
-                    $location.url('/login');
-                });
+            userService.deleteUser(user._id);
+            $location.url('/login');
         }
 
         function updateUser(user) {
             userService
-                .updateUser(user._id, user)
-                .then(function () {
+                .updateUser(model.user._id, user);
                     model.message = "User updated successfully";
-                });
         }
+
+        function init() {
+            model.user = angular.copy(userService.findUserById(uid));
+        }
+        init();
+
+
+
     }
+
 })();

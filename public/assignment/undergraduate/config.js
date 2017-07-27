@@ -4,78 +4,75 @@
         .config(configuration);
     
     function configuration($routeProvider) {
+
         $routeProvider
-            .when('/', {
-                templateUrl: 'views/home/templates/home.html',
-                controller: 'homeController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkCurrentUser
-                }
-            })
-            .when('/admin', {
-                templateUrl: 'views/admin/templates/admin.view.client.html',
-                resolve: {
-                    currentUser: checkAdmin
-                }
-            })
-            .when('/login', {
+
+            .when( '/', {
                 templateUrl: 'views/user/templates/login.view.client.html',
                 controller: 'loginController',
-                controllerAs: 'vm'
+                controllerAs: 'model'
+            })
+            .when('/login',  {
+                templateUrl: 'views/user/templates/login.view.client.html',
+                controller: 'loginController',
+                controllerAs: 'model'
             })
             .when('/register', {
-                templateUrl: 'views/user/templates/register.html',
-                controller: 'registerController',
-                controllerAs: 'model'
+                templateUrl:'views/user/templates/register.view.client.html',
+                controller:"registerController",
+                controllerAs:"model"
             })
-            .when('/profile', {
-                templateUrl: 'views/user/templates/profile.html',
-                controller: 'profileController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedIn
-                }
+            .when('/user/:uid', {
+                templateUrl:'views/user/templates/profile.view.client.html',
+                controller:"profileController",
+                controllerAs:"model"
             })
-            .when('/user/:userId/website', {
-                templateUrl: 'views/website/templates/website-list.view.client.html'
-                ,controller: 'websiteListController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedIn
-                }
+            .when('/user/:uid/website', {
+                templateUrl:'views/website/templates/website-list.view.client.html',
+                controller:"websiteListController",
+                controllerAs:"model"
             })
-            .when('/user/:userId/website/new', {
-                templateUrl: 'views/website/templates/website-new.view.client.html',
-                controller: 'websiteNewController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedIn
-                }
+            .when('/user/:uid/website/new', {
+                templateUrl:'views/website/templates/website-new.view.client.html',
+                controller:"websiteNewController",
+                controllerAs:"model"
             })
-            .when('/user/:userId/website/:websiteId', {
-                templateUrl: 'views/website/templates/website-edit.view.client.html',
-                controller: 'websiteEditController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedIn
-                }
+            .when('/user/:uid/website/:wid', {
+                templateUrl:'views/website/templates/website-edit.view.client.html',
+                controller:"websiteEditController",
+                controllerAs:"model"
             })
-            // page routing TBD
-            // widget routing
-            .when('/user/:userId/website/:websiteId/page/:pageId/widget', {
-                templateUrl: 'views/widget/templates/widget-list.view.client.html',
-                controller: 'widgetListController',
-                controllerAs: 'model'
+            .when('/user/:uid/website/:wid/page', {
+                templateUrl:'views/page/templates/page-list.view.client.html',
+                controller:"pageListController",
+                controllerAs:"model"
             })
-            .when('/widget/:widgetId', {
-                templateUrl: 'views/widget/templates/widget-image-editor.html'
+            .when('/user/:uid/website/:wid/page/new', {
+                templateUrl:'views/page/templates/page-new.view.client.html',
+                controller:"pageNewController",
+                controllerAs:"model"
             })
-            .when('/widget/:widgetId/search', {
-                templateUrl: 'views/widget/templates/widget-flickr-search.view.client.html',
-                controller: 'flickrController',
-                controllerAs: 'model'
+            .when('/user/:uid/website/:wid/page/:pid', {
+                templateUrl:'views/page/templates/page-edit.view.client.html',
+                controller:"pageEditController",
+                controllerAs:"model"
             })
+            .when('/user/:uid/website/:wid/page/:pid/widget', {
+                templateUrl:'views/widget/templates/widget-list.view.client.html',
+                controller:"widgetListController",
+                controllerAs:"model"
+            })
+            .when('/user/:uid/website/:wid/page/:pid/widget/chooser', {
+                templateUrl:'views/widget/templates/widget-chooser.view.client.html',
+                controller:"widgetNewController",
+                controllerAs:"model"
+            })
+            .when('/user/:uid/website/:wid/page/:pid/widget/:wgid', {
+                templateUrl:'views/widget/templates/widget-editor.view.client.html',
+                controller:"widgetEditController",
+                controllerAs:"model"
+            })
+
 
     }
 
@@ -86,21 +83,6 @@
             .then(function (currentUser) {
                 if(currentUser === '0') {
                     deferred.resolve({});
-                } else {
-                    deferred.resolve(currentUser);
-                }
-            });
-        return deferred.promise;
-    }
-
-    function checkAdmin($q, $location, userService) {
-        var deferred = $q.defer();
-        userService
-            .checkAdmin()
-            .then(function (currentUser) {
-                if(currentUser === '0') {
-                    deferred.resolve({});
-                    $location.url('/');
                 } else {
                     deferred.resolve(currentUser);
                 }

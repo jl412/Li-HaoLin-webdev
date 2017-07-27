@@ -20,6 +20,14 @@ body{
     background: #EEE;
 }
 
+.page-wrapper{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 
 h1{
     margin-bottom: 1em;
@@ -140,6 +148,7 @@ h2{
     border-radius: 7px;
     background-color: #fff;
     margin-bottom: 20px;
+    overflow: hidden;
 }
 
 .widget-holder > h1, .widget-holder > h2, .widget-holder > h3,
@@ -147,8 +156,8 @@ h2{
     margin-right: 90px;
 }
 
-.widget-holder > img{
-    width: 100%;
+.widget-holder > div > img{
+    text-align: center;
     height:auto;
 }
 

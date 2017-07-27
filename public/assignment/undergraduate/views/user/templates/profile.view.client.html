@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Profile</title>
-    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/styles.css" rel="stylesheet"/>
-    <link href="css/profile.css" rel="stylesheet"/>
-</head>
-<body>
 
 <div class="jga jga-profile">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Profile</a>
+                <a class="navbar-brand" role="button">Profile</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-right-control">
-                <a href="#"><span class="glyphicon glyphicon-ok"></span></a>
+                <a ng-click="model.update(model.user)" role="button"><span class="glyphicon glyphicon-ok"></span></a>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
@@ -35,14 +23,16 @@
                 <input name="firstName"
                        placeholder="Alice"
                        class="form-control"
-                       id="firstName"/>
+                       id="firstName"
+                       ng-model="model.user.firstName"/>
             </div>
             <div class="col-md-6">
                 <label for="lastName">Last Name</label>
                 <input name="lastName"
                        placeholder="Wonderland"
                        class="form-control"
-                       id="lastName"/>
+                       id="lastName"
+                       ng-model="model.user.lastName"/>
             </div>
             <div class="col-md-6"><label for="username">Username</label>
                 <input name="username"
@@ -50,36 +40,43 @@
                        value="alice"
                        placeholder="alice"
                        class="form-control"
-                       id="username"/>
+                       id="username"
+                       ng-model="model.user.username"/>
             </div>
             <div class="col-md-6"><label for="email">Email</label>
                 <input name="email"
                        type="email"
                        placeholder="alice@wonderland.com"
                        class="form-control"
-                       id="email"/>
+                       id="email"
+                       ng-model="model.user.email"/>
             </div>
             <div class="col-md-6">
                 <label for="dob">Date of Birth</label>
                 <input name="dob"
                        type="date"
                        class="form-control"
-                       id="dob"/>
+                       id="dob"
+                       ng-model="model.user.dob"/>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6">
                 <a class="btn btn-default btn-primary btn-block"
-                   href="website-list.html"
+                   href="#!/user/{{model.user._id}}/website"
                    role="button">Websites</a>
             </div>
             <div class="col-md-6">
                 <a class="btn btn-default btn-danger btn-block"
-                   href="login.html"
+                   href="#!/login"
                    role="button">Logout</a>
             </div>
 
+        </div>
+
+        <div ng-show="model.message" class="alert alert-danger">
+            {{model.message}}
         </div>
 
         <!--<div class="footer-margin-space"></div>-->
@@ -89,5 +86,3 @@
         <a href="profile.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
     </footer>
 </div>
-</body>
-</html>

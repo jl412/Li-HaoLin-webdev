@@ -8,8 +8,8 @@
                                   $location) {
 
         var model = this;
-        model.userId = $routeParams['userId'];
-        model.websiteId = $routeParams.websiteId;
+        model.uid = $routeParams['uid'];
+        model.wid = $routeParams.wid;
 
         // event handlers
         model.createWebsite = createWebsite;
@@ -17,28 +17,26 @@
         model.deleteWebsite = deleteWebsite;
 
         function init() {
-            model.websites = websiteService.findAllWebsitesForUser(model.userId);
-            model.website = websiteService.findWebsiteById(model.websiteId);
+            model.websites = websiteService.findWebsitesByUser(model.uid);
+            model.website = angular.copy(websiteService.findWebsiteById(model.wid));
         }
         init();
 
         // implementation
         function createWebsite(website) {
-            website.developerId = model.userId;
+            website.developerId = model.uid;
             websiteService.createWebsite(website);
-            $location.url('/user/'+model.userId+'/website');
+            $location.url('/user/'+model.uid+'/website');
         }
 
         function updateWebsite(website) {
-            websiteService.updateWebsite();
+            websiteService.updateWebsite(model.website._id, website);
+            model.message = "website updated successfully";
         }
 
-        function deleteWebsite(websiteId) {
-            websiteService
-                .deleteWebsite(model.userId, websiteId)
-                .then(function () {
-                    $location.url('/user/'+model.userId+'/website');
-                });
+        function deleteWebsite(wid) {
+            websiteService.deleteWebsite(wid);
+            $location.url('/user/'+model.uid+'/website');
         }
     }
 })();
