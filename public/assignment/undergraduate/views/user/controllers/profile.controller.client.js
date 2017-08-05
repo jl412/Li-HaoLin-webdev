@@ -14,23 +14,30 @@
 
 
         function logout() {
-            userService.logout();
             $location.url('/login');
         }
 
         function deleteUser(user) {
-            userService.deleteUser(user._id);
-            $location.url('/login');
+            userService
+                .deleteUser(user._id)
+                .then(function () {
+                    $location.url('/login');
+                });
         }
 
         function updateUser(user) {
-            userService
-                .updateUser(model.user._id, user);
-                    model.message = "User updated successfully";
+            userService.updateUser(model.user._id, user)
+                .then(function () {
+                    model.message = 'user updated successfully'
+                });
         }
 
         function init() {
-            model.user = angular.copy(userService.findUserById(uid));
+            userService
+                .findUserById(uid)
+                .then(function (user) {
+                    model.user = user;
+                });
         }
         init();
 

@@ -3,13 +3,7 @@
         .module("WAM")
         .factory("pageService", pageService);
 
-    function pageService() {
-
-        var pages = [
-            { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
-            { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem" },
-            { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" }
-        ]
+    function pageService($http) {
 
 
         var api = {
@@ -23,41 +17,43 @@
         return api;
 
         function createPage(page) {
-            page._id = (new Date()).getTime() + "";
-            pages.push(page);
-            console.log(pages);
+            var url = '/api/assignment/user/uid/website/wid/page';
+            return $http.post(url,page)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
         function findPageByWid(wid) {
-            var resultSet = [];
-            pages.forEach(function (page) {
-                if(page.websiteId === wid){
-                    resultSet.push(page);
-                }
-            });
-            return resultSet;
+            var url = '/api/assignment/user/uid/website/' + wid + '/page';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
         }
 
-        function findPageById(pageId) {
-            return pages.find(function (page) {
-                return page._id === pageId;
-            })
+        function findPageById(pid) {
+            var url = '/api/assignment/user/uid/website/wid/page/' + pid;
+            return $http.get(url)
+                .then(function (response ) {
+                    return response.data;
+                })
         }
 
         function updatePage(pid, page) {
-            var oldPage = pages.find(function (page) {
-                return page._id ===pid;
-            });
-            oldPage.name = page.name;
-            oldPage.description = page.description;
+            var url = '/api/assignment/user/uid/website/wid/page/' + pid;
+            return $http.put(url, page)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
         function deletePage(pid) {
-            var page = pages.find(function (page) {
-                return page._id ===pid;
-            });
-            var index = pages.indexOf(page);
-            pages.splice(index,1);
+            var url = '/api/assignment/user/uid/website/wid/page/' + pid;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
     }

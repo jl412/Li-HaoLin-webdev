@@ -2,6 +2,6 @@
 
     console.log("app starting");
     angular
-        .module('WAM',['ngRoute'])
+        .module('WAM',['ngRoute', 'widgetDirectives'])
 
 })();

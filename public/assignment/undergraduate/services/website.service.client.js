@@ -3,19 +3,7 @@
         .module("WAM")
         .factory("websiteService", websiteService);
 
-    function websiteService() {
-
-        var websites = [
-            { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
-            { "_id": "234", "name": "Tweeter",     "developerId": "456", "description": "Lorem" },
-            { "_id": "456", "name": "Gizmodo",     "developerId": "456", "description": "Lorem" },
-            { "_id": "890", "name": "Go",          "developerId": "123", "description": "Lorem" },
-            { "_id": "567", "name": "Tic  Tac Toe", "developerId": "123", "description": "Lorem" },
-            { "_id": "678", "name": "Checkers",    "developerId": "123", "description": "Lorem" },
-            { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" },
-            { "_id": "888", "name": "asd",       "developerId": "234", "description": "Lorem" },
-            { "_id": "999", "name": "ffd",       "developerId": "234", "description": "Lorem" }
-        ];
+    function websiteService($http) {
 
         var api = {
             createWebsite:createWebsite,
@@ -28,40 +16,44 @@
         return api;
 
         function createWebsite(website) {
-            website._id = (new Date()).getTime() + "";
-            websites.push(website);
+            var url = '/api/assignment/user/uid/website';
+            return $http.post(url,website)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
         function findWebsitesByUser(uid) {
-            var resultSet = [];
-            websites.forEach(function (website) {
-                if(website.developerId === uid){
-                    resultSet.push(website);
-                }
-            });
+            var url = '/api/assignment/user/' + uid + '/website';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
             return resultSet;
         }
 
         function findWebsiteById(wid) {
-            return websites.find(function (website) {
-                return website._id === wid;
-            })
+            var url = '/api/assignment/user/uid/website/' + wid;
+            return $http.get(url)
+                .then(function (response ) {
+                    return response.data;
+                })
         }
 
         function updateWebsite(wid, newInfo) {
-            var website = websites.find(function (website) {
-                return website._id === wid;
-            });
-            website.name = newInfo.name;
-            website.description = newInfo.description;
+            var url = '/api/assignment/user/uid/website/'+wid;
+            return $http.put(url, newInfo)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
         function deleteWebsite(wid) {
-            var website = websites.find(function (website) {
-                return website._id === wid;
-            });
-            var index = websites.indexOf(website);
-            websites.splice(index,1);
+            var url = '/api/assignment/user/uid/website/'+ wid;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                })
         }
     }
 })();

@@ -35,7 +35,11 @@
         }
 
         function init() {
-            model.widgets = widgetService.findWidgetsByPid(model.pid);
+            widgetService
+                .findWidgetsByPid(model.pid)
+                .then(function (widgets) {
+                    model.widgets = widgets;
+                });
 
         }
 

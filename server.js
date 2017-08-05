@@ -42,7 +42,8 @@ blog(app);
 
 // var todo = require('./lectures/undergraduate/todo/app');
 // todo(app);
-require('./assignment/undergrad/app');
+
+require('./assignment/app.js');
 // require('./assignment/graduates/app');
 // require('./experiments/oxford/oxford.service.server');
 // require('./lectures/undergraduate/ejs/hello');

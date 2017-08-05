@@ -14,15 +14,22 @@
         model.createWebsite = createWebsite;
 
         function init() {
-            model.websites = websiteService.findWebsitesByUser(model.uid);
+            websiteService
+                .findWebsitesByUser(model.uid)
+                .then(function (websites) {
+                    model.websites = websites;
+                });
         }
         init();
 
         // implementation
         function createWebsite(website) {
             website.developerId = model.uid;
-            websiteService.createWebsite(website);
-            $location.url('/user/'+model.uid+'/website');
+            websiteService
+                .createWebsite(website)
+                .then(function (website) {
+                    $location.url('/user/' + model.uid + '/website');
+                })
         }
     }
 })();
