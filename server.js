@@ -8,7 +8,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + '/public'));
 
-// require("./test/app.js");
+require("./test/app.js");
 require("./assignment/app");
 
 var port = process.env.PORT || 3000;
