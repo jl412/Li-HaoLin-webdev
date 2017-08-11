@@ -11,6 +11,7 @@ if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
     var password = process.env.MLAB_PASSWORD_WEBDEV;
     connectionString = 'mongodb://' + username + ':' + password;
     connectionString += '@ds157282.mlab.com:57282/heroku_3z32f873'; // user yours
+    console.log("mongo running remotely");
 }
 // Replace "@ds157268.mlab.com:57268/heroku_nh37fqq4"
 // above with your own URL given to you by mLab
