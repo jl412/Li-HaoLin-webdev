@@ -21,19 +21,29 @@
             }
 
             var found = userService.findUserByUsername(username);
+            found
+                .then(function (repsonse) {
 
-            if(found !== null){
-                model.error = "Username is not available";
-            } else{
-                var user = {
-                    username:username,
-                    password:password,
+                    console.log(repsonse);
 
-                };
+                    if(repsonse === "0"){
+                        var user = {
+                            username:username,
+                            password:password,
 
-                userService.createUser(user);
-                $location.url("/user/" + user._id);
-            }
+                        };
+
+                        userService
+                            .createUser(user)
+                            .then(function (user) {
+                                $location.url("/user/" + user._id);
+                            })
+
+                    } else{
+                        model.error = "Username is not available";
+                    }
+
+                })
 
         }
     }

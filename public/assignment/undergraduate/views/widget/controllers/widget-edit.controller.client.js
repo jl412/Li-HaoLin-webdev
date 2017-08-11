@@ -10,20 +10,23 @@
         model.wid = $routeParams['wid'];
         model.pid = $routeParams['pid'];
         model.wgid = $routeParams['wgid'];
-        //model.widgetType = $routeParams['widgetType'];
-        //model.widgetType;
 
 
         model.updateWidget = updateWidget;
-        model.deleteWidget = deleteWidget
-        model.getWidgetType = getWidgetType;
+        model.deleteWidget = deleteWidget;
 
         function init() {
-            model.widgets = widgetService.findWidgetsByPid(model.pid);
-            model.widget = angular.copy(widgetService.findWidgetById(model.wgid));
-
-            model.widgetType = widgetService.getWidgetType(model.wgid);
-            console.log(model.widgetType);
+            widgetService
+                .findWidgetsByPid(model.pid)
+                .then(function (widgets) {
+                    model.widgets = widgets;
+                })
+            widgetService
+                .findWidgetById(model.wgid)
+                .then(function (widget) {
+                    model.widget = widget;
+                    console.log(model.widget);
+                })
 
         }
 
@@ -31,18 +34,20 @@
 
 
 
-        function getWidgetType(wgid) {
-            widgetService.getWidgetType(wgid);
-        }
-
         function updateWidget(widget) {
-            widgetService.updateWidget(model.widget._id, widget);
-            model.message = "widget updated successfully";
+            widgetService
+                .updateWidget(model.widget._id, widget)
+                .then(function () {
+                    model.message = "widget updated successfully";
+                });
         }
 
         function deleteWidget(wgid) {
-            widgetService.deleteWidget(wgid)
-            $location.url('/user/' + model.uid + '/website/'+ model.wid + '/page/' + model.pid + '/widget');
+            widgetService
+                .deleteWidget(model.widget._id)
+                .then(function () {
+                    $location.url('/user/' + model.uid + '/website/'+ model.wid + '/page/' + model.pid + '/widget');
+                });
         }
 
     }

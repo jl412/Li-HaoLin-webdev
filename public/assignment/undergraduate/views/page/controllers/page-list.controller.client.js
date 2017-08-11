@@ -11,7 +11,11 @@
 
 
         function init() {
-            model.pages =  pageService.findPageByWid(model.wid)
+            pageService
+                .findPageByWid(model.wid)
+                .then(function (pages) {
+                    model.pages = pages;
+                });
         }
 
         init();

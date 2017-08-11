@@ -12,31 +12,44 @@
         model.wid = $routeParams.wid;
 
         // event handlers
-        model.createWebsite = createWebsite;
+        // model.createWebsite = createWebsite;
         model.updateWebsite = updateWebsite;
         model.deleteWebsite = deleteWebsite;
 
         function init() {
-            model.websites = websiteService.findWebsitesByUser(model.uid);
-            model.website = angular.copy(websiteService.findWebsiteById(model.wid));
+            websiteService
+                .findWebsitesByUser(model.uid)
+                .then(function (websites) {
+                    model.websites = websites;
+                })
+            websiteService
+                .findWebsiteById(model.wid)
+                .then(function (website) {
+                    model.website = website;
+                })
         }
         init();
 
-        // implementation
-        function createWebsite(website) {
-            website.developerId = model.uid;
-            websiteService.createWebsite(website);
-            $location.url('/user/'+model.uid+'/website');
-        }
+        // function createWebsite(website) {
+        //     website.developerId = model.uid;
+        //     websiteService.createWebsite(website);
+        //     $location.url('/user/'+model.uid+'/website');
+        // }
 
         function updateWebsite(website) {
-            websiteService.updateWebsite(model.website._id, website);
-            model.message = "website updated successfully";
+            websiteService.updateWebsite(model.website._id, website)
+                .then(function () {
+                    model.message = "website updated successfully";
+                });
+
         }
 
         function deleteWebsite(wid) {
-            websiteService.deleteWebsite(wid);
-            $location.url('/user/'+model.uid+'/website');
+            websiteService
+                .deleteWebsite(model.website._id)
+                .then(function () {
+                    $location.url('/user/' + model.uid + '/website');
+                });
         }
     }
 })();
