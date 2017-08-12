@@ -2,7 +2,7 @@ var app = require('../../express');
 
 
 var multer = require('multer'); // npm install multer --save
-var upload = multer({ dest: __dirname +  '../../public/uploads' });
+var upload = multer({ dest: __dirname +  '/../../public/uploads' });
 
 app.get('/api/assignment/user/:uid/website/:wid/page/:pid/widget', findWidgetsByPid);
 app.post('/api/assignment/user/:uid/website/:wid/page/:pid/widget', createWidget);
@@ -141,7 +141,7 @@ function uploadImage(req, res) {
 
     widget.url = '/uploads/' + filename;
 
-    var callbackUrl   = "/assignment/undergraduate/index.html#!/user/" + uid + "/website/" + wid + "/page/" + pid + "/widget/" + wgid;
+    var callbackUrl   = "/assignment/index.html#!/user/" + uid + "/website/" + wid + "/page/" + pid + "/widget/" + wgid;
 
     res.redirect(callbackUrl);
 }
