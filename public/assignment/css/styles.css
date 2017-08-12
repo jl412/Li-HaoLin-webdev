@@ -6,6 +6,14 @@ html, body{
     transition-timing-function: ease;
 }
 
+input.form-control {
+    margin-bottom: 5px;
+}
+
+body {
+    padding-top: 36px;
+}
+
 a{
     color: inherit;
     text-decoration: none;
@@ -182,6 +190,10 @@ h2{
 .widget-control span{
     margin-right: 10px;
  }
+
+.widget-control .glyphicon-menu-hamburger{
+    cursor:pointer;
+}
 
 .add-widget-holder{
     border: 2px dashed #ccc;

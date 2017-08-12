@@ -20,7 +20,7 @@
             var url = '/api/assignment/user/uid/website/wid/page/pid/widget';
             return $http.post(url,widget)
                 .then(function (response) {
-                    //console.log(response);
+                    console.log(response.data);
                     return response.data;
                 })
         }

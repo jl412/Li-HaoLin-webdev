@@ -6,10 +6,12 @@
     function widgetSortableDirective($http, $routeParams) {
         function linkFunction(scope, element) {
             var widgetList = element.find("ul");
-            console.log(widgetList);
+            // console.log(widgetList);
             var initial = -1;
             var final = -1;
             widgetList.sortable({
+                axis: "y",
+                handle: ".widget-control .glyphicon-menu-hamburger",
                 start: function (event, ui) {
 
                     initial = $(ui.item).index();

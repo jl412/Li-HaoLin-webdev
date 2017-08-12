@@ -1,69 +1,68 @@
 var app = require('../../express');
+var websiteModel = require("../model/website/website.model.server");
 
 app.post('/api/assignment/user/:uid/website', createWebsite);
 app.get('/api/assignment/user/:uid/website', findAllWebsitesForUser);
-app.get('/api/assignment/user/:uid/website/:wid', findWebsiteById);
-app.put('/api/assignment/user/:uid/website/:wid', updateWebsite);
-app.delete('/api/assignment/user/:uid/website/:wid', deleteWebsite);
-
-var websites = [
-    { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
-    { "_id": "234", "name": "Tweeter",     "developerId": "456", "description": "Lorem" },
-    { "_id": "456", "name": "Gizmodo",     "developerId": "456", "description": "Lorem" },
-    { "_id": "890", "name": "Go",          "developerId": "123", "description": "Lorem" },
-    { "_id": "567", "name": "Tic  Tac Toe", "developerId": "123", "description": "Lorem" },
-    { "_id": "678", "name": "Checkers",    "developerId": "123", "description": "Lorem" },
-    { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" }
-];
+app.get('/api/assignment/user/uid/website/:wid', findWebsiteById);
+app.put('/api/assignment/user/uid/website/:wid', updateWebsite);
+app.delete('/api/assignment/user/uid/website/:wid', deleteWebsite);
 
 function createWebsite(req, res) {
     var website = req.body;
-    website._id = (new Date()).getTime() + "";
-    websites.push(website);
-    res.send(website);
+
+    websiteModel
+        .createWebsiteForUser(website)
+        .then(function (website) {
+            res.json(website);
+        }, function (err) {
+            res.sendStatus(500).send(err);
+        });
 }
 
 function findWebsiteById(req, res) {
-    var uid =  req.params['uid'];
-    var wid =  req.params['wid'];
-    var website = websites.find(function (website) {
-        return website._id === wid;
-    });
-    res.send(website);
+    var wid = req.params.wid;
+
+    websiteModel
+        .findWebsiteById(wid)
+        .then(function (website) {
+                res.json(website);
+            },
+            function (err) {
+                res.sendStatus(404).send(err);
+            });
 }
 
 function findAllWebsitesForUser(req, res) {
-    var resultSet = [];
-    for(var w in websites){
-        if(websites[w].developerId === req.params.uid){
-            resultSet.push(websites[w]);
-        }
-    }
-    res.json(resultSet);
+    var uid = req.params.uid;
+
+    websiteModel
+        .findAllWebsitesForUser(uid)
+        .then(function (websites) {
+            res.send(websites);
+        });
 }
 
 function updateWebsite(req, res) {
-    var website = req.body;
-    var uid = req.params.uid;
     var wid = req.params.wid;
-    for (var w in websites){
-        if(wid === websites[w]._id){
-            websites[w].name = website.name;
-            websites[w].description = website.description;
-            res.sendStatus(200);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    var website = req.body;
+
+    websiteModel
+        .updateWebsite(wid, website)
+        .then(function (status) {
+            res.json(status);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        });
 }
 
 function deleteWebsite(req, res) {
 
-    var wid = req.params.wid;
-    var website = websites.find(function (website) {
-        return website._id ===wid;
-    });
-    var index = websites.indexOf(website);
-    websites.splice(index,1);
-    res.sendStatus(200);
+    var pageId = request.params.pageId;
+    var websiteId = request.params.websiteId;
+
+    pageModel
+        .deletePage(pageId)
+        .then(function (status) {
+            response.json(status);
+        });
 }

@@ -8,7 +8,7 @@
                                   $location) {
 
         var model = this;
-        model.uid = $routeParams['uid'];
+        model.uid = $routeParams.uid;
         model.wid = $routeParams.wid;
 
         // event handlers
@@ -30,11 +30,6 @@
         }
         init();
 
-        // function createWebsite(website) {
-        //     website.developerId = model.uid;
-        //     websiteService.createWebsite(website);
-        //     $location.url('/user/'+model.uid+'/website');
-        // }
 
         function updateWebsite(website) {
             websiteService.updateWebsite(model.website._id, website)

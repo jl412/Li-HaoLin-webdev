@@ -24,7 +24,7 @@
 
         // implementation
         function createWebsite(website) {
-            website.developerId = model.uid;
+            website._user = model.uid;
             websiteService
                 .createWebsite(website)
                 .then(function (website) {

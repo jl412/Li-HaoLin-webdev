@@ -21,7 +21,7 @@
         init();
 
         function createPage(page) {
-            page.websiteId = model.wid;
+            page._website = model.wid;
             pageService
                 .createPage(page)
                 .then(function (page) {

@@ -24,9 +24,8 @@
 
         function createWidget(string) {
             var widget = {
-                "pageId":model.pid,
-                "widgetType":string,
-                _id:(new Date()).getTime() + ""
+                "_page":model.pid,
+                "widgetType":string
             };
 
             widgetService
