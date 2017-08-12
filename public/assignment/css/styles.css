@@ -211,6 +211,9 @@ h2{
     color: #777 !important;
 }
 
+.buttons{
+    margin-top: 1em;
+}
 
 input, textarea {
     margin-bottom: 20px;
@@ -228,6 +231,10 @@ body {
     border-radius: 7px;
 
     margin:15px;
+}
+
+.text-widget{
+    margin-top: 5em;
 }
 
 .jga .navbar-default {

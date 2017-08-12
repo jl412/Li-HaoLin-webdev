@@ -32,9 +32,15 @@
                         <div ng-switch-when="YOUTUBE" class="col-xs-12">
                             <ng-include src="'views/widget/editors/widget-youtube-edit.view.client.html'"/>
                         </div>
+                        <div ng-switch-when="HTML" class="col-xs-12">
+                            <ng-include src="'views/widget/editors/widget-html-edit.view.client.html'"/>
+                        </div>
+                        <div ng-switch-when="TEXT" class="col-xs-12">
+                            <ng-include src="'views/widget/editors/widget-text-edit.view.client.html'"/>
+                        </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row buttons">
                         <div class="col-md-6">
                             <a class="btn btn-default btn-primary btn-block"
                                ng-click="model.updateWidget(model.widget)"
