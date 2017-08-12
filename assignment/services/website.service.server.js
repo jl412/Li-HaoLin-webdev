@@ -57,12 +57,11 @@ function updateWebsite(req, res) {
 
 function deleteWebsite(req, res) {
 
-    var pageId = request.params.pageId;
-    var websiteId = request.params.websiteId;
+    var wid = req.params.wid;
 
-    pageModel
-        .deletePage(pageId)
+    websiteModel
+        .deleteWebsite(wid)
         .then(function (status) {
-            response.json(status);
+            res.sendStatus(200);
         });
 }

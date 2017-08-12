@@ -45,7 +45,6 @@ function deleteWebsite(websiteId) {
     return websiteModel
         .remove({_id: websiteId})
         .then(function (status) {
-            console.log("remove website");
             userModel
                 .findOne({websites: websiteId})
                 .then(function (user) {
