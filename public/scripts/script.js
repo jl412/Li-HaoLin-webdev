@@ -4,8 +4,8 @@ $(document).ready(function() {
         menu: '#menu'
     });
 
-    $(window).load(function(){
-        $('.loading.initial').hide("fade", 1500);
-    });
+});
 
+$(window).load(function(){
+    $('.loading.initial').hide("fade", 1500);
 });
