@@ -1,33 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Web Dev Course Home Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
+            integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk="
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/jquery.fullpage.min.css">
+    <script type="text/javascript" src="scripts/jquery.fullpage.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="scripts/script.js"></script>
 </head>
 <body>
-    <h1>Web Dev Course Home Page !!!!!!</h1>
 
-    <p>
-        Customize this home page to your linking.
-    </p>
+<div class="loading initial">
+    <div class="message">
+        <img src="img/loading.gif"/>
+        <p>Now Loading. Please Wait</p>
+    </div>
+</div>
 
-    <h2>Required links</h2>
-    <ul>
-        <li>
-            <a href="https://music-on-the-fly.herokuapp.com">Project</a>
-        </li>
-        <li>
-            <a href="assignment/">Assignment</a>
-        </li>
-        <li>
-            <a href="test/index.html">Test MongoDB</a>
-        </li>
-        <li>
-            <a href="https://github.com/jannunzi/webdev-summer1-2017">Your public repository at GitHub.com</a>
-        </li>
-        <li>
-            <a href="/lectures">Lectures</a>
-        </li>
-    </ul>
+<ul id="menu">
+    <li data-menuanchor="Home"><a href="#Home">Home</a></li>
+    <li data-menuanchor="Details"><a href="#Details">Details</a></li>
+</ul>
+<div id="fullpage">
+    <div class="section " id="section0">
+        <h1>Web Dev Course Home Page</h1>
+        <input type="hidden" name="id" value="1" />
+        <p>I am a undergraduate student of Northeastern University, major in Computer Science and Interactive Mdeia.</p>
+        <p>Scroll down to check out my works</p>
+        <div class="direction-pointer"><h1><i class="fa fa-chevron-down" aria-hidden="true"></i></h1></div>
+        <div class="bg-holder" id="particles-js"></div>
+    </div>
+    <div class="section " id="section1">
+        <div class="row">
+            <div class="col-md-6" id="project">
+                <div class="valign-p">
+                    <div class="valign-c">
+                        <a href="https://music-on-the-fly.herokuapp.com"><h2>Project</h2></a>
+                    </div>
+                </div>
+                <div class="bg-holder"></div>
+            </div>
+            <div class="col-md-6" id="assignment">
+                <div class="valign-p">
+                    <div class="valign-c">
+                        <a href="assignment/"><h2>Assignment</h2></a>
+                    </div>
+                </div>
+                <div class="bg-holder"></div>
+            </div>
+            <div class="col-md-6" id="github">
+                <div class="valign-p">
+                    <div class="valign-c">
+                        <a href="https://github.com/jl412/Li-HaoLin-webdev"><h2>My public repository at GitHub</h2></a>
+                    </div>
+                </div>
+                <div class="bg-holder"></div>
+            </div>
+            <div class="col-md-6" id="mongodb">
+                <div class="valign-p">
+                    <div class="valign-c">
+                        <a href="test/index.html"><h2>Test MongoDB</h2></a>
+                    </div>
+                </div>
+                <div class="bg-holder"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="particles.js"></script>
+<script src="scripts/app.js"></script>
+
 </body>
 </html>
